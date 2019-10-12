@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>The Psychic Game</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="reset.css">
+        <script type="text/javascript" src="game.js"></script>
+    </head>
+    <body>
+
+        <div id="psychic-game">
+            <h1> The Psychic Game </h1>
+            <p>Guess what letter I'm thinking of</p>
+            <p>Wins:</p>
+            <p>Losses:</p>
+            <p>totalGuess Left:</p>
+            <p>Your totalGuess so far:</p>
+        </div>
+
+
+        <script type="text/javascript">
+		
+            var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",];
+   
+            var wins = 0;
+            var losses = 0;
+            var totalGuess = 9;
+            var choices = [];
+   
+            document.onkeyup = function(event) {
+   
+                var playerGuess = event.key;
+   
+                var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+   
+                var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",];
+                
+   
+               if (letters.indexOf(playerGuess) > -1) {
+   
+                   if (playerGuess === computerGuess) {
+                       wins++;
+                    totalGuess = 9;
+                       choices = [];
+                   }
+   
+                   if (playerGuess != computerGuess) {
+                    totalGuess --;
+                       choices.push(playerGuess);
+                   }
+   
+                   if (totalGuess === 0) {
+   
+                totalGuess = 9;
+                   losses ++;
+                   choices = [];
+   
+                   
+               }
+   
+               var html = 
+               "<h1> The Psychic Game </h1>" +
+               "<p>Guess what letter I'm thinking of</p>" +
+               "<p>Wins: " + wins + "</p>" +
+               "<p>Losses: " + losses + "</p>" +
+               "<p>totalGuess Left: " + totalGuess + "</p>" +
+               "<p>Your totalGuess so far: " + choices.join(", ") + "</p>";
+   
+               document.querySelector("#psychic-game").innerHTML = html;
+   
+               
+               }
+           };
+   
+       </script>
+    </body>
+</html>
